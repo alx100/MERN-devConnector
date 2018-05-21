@@ -33,7 +33,9 @@ class Education extends Component {
               <th></th>
             </tr>
           </thead>
-          {education}
+          <tbody>
+            {education}
+          </tbody>
         </table>
       </div>
     )
