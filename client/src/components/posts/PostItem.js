@@ -28,7 +28,7 @@ class PostItem extends Component {
   }
 
   render() {
-    const { post, auth } = this.props;
+    const { post, auth, showActions } = this.props;
 
     return (
       <div className="card card-body mb-3">
@@ -48,6 +48,8 @@ class PostItem extends Component {
             <p className="lead">
               {post.text}
             </p>
+            {showActions ? (
+            <span>
             <button
               onClick={this.onLikeClick.bind(this, post._id)} 
               type="button" 
@@ -77,11 +79,17 @@ class PostItem extends Component {
                 <i className="fas fa-times"></i>
               </button>
             ) : null }
+            
+            </span>) : null }
           </div>
         </div>
       </div>
     )
   }
+}
+
+PostItem.defaultProps = {
+  showActions: true
 }
 
 PostItem.propTypes = {
