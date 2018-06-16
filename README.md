@@ -1,5 +1,5 @@
-# Dev Connector - social network for developers
-This is a fullstack app on React/Redux, Node/Express/MongoDB with JSON Web Token authorization.
+## Dev Connector - social network for developers
+Fullstack app on React/Redux, Node/Express/MongoDB with JSON Web Token authorization.
 
 You can also see it live on https://alx100-fullstack-devconnector.herokuapp.com/
 
