@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { func, object } from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
@@ -9,6 +9,14 @@ import Experience from './Experience';
 import Education from './Education';
 
 class Dashboard extends Component {
+  
+  static propTypes = {
+    getCurrentProfile: func.isRequired,
+    deleteAccount: func.isRequired,
+    profile: object.isRequired,
+    auth: object.isRequired
+  }
+
   componentDidMount() {
     this.props.getCurrentProfile();
   }
@@ -72,14 +80,6 @@ class Dashboard extends Component {
     )
   }
 }
-
-Dashboard.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
-  deleteAccount: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
-}
-
 
 const mapStateToProps = (state) => ({
    profile: state.profile,
