@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { func, object } from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/authActions';
 
@@ -14,9 +14,12 @@ class Login extends Component {
       password: '',
       errors: {}
     };
-    
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  static propTypes = {
+    loginUser: func.isRequired,
+    auth: object.isRequired, 
+    errors: object.isRequired 
   }
   
   componentDidMount() {
@@ -35,11 +38,11 @@ class Login extends Component {
     }
   }
 
-  onChange(e) {
+  onChange = (e) => {
     this.setState({[e.target.name]: e.target.value});
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const userData = {
@@ -86,12 +89,6 @@ class Login extends Component {
       </div>
     )
   }
-}
-
-Login.propTypes = {
-  loginUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired, 
-  errors: PropTypes.object.isRequired 
 }
 
 const mapStateToProps = (state) => ({

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { func, object } from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authActions';
@@ -16,10 +16,13 @@ class Register extends Component {
       password2: '',
       errors: {}
     };
-
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
+
+  static propTypes = {
+    registerUser: func.isRequired,
+    auth: object.isRequired,
+    errors: object.isRequired
+  };
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
@@ -27,18 +30,17 @@ class Register extends Component {
     }
   }
 
-
   componentWillReceiveProps(nextProps) {
     if(nextProps.errors) {
       this.setState({errors: nextProps.errors});
     }
   }
 
-  onChange(e) {
+  onChange = (e) => {
     this.setState({[e.target.name]: e.target.value })
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const newUser = {
@@ -108,12 +110,6 @@ class Register extends Component {
     )
   }
 }
-
-Register.propTypes = {
-  registerUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
-};
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
