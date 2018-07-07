@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { connect } from 'react-redux';
-import { object, func } from 'prop-types';
+import PropTypes from 'prop-types';
 import { addExperience } from '../../actions/profileActions';
 
 class AddExperience extends Component {
@@ -20,12 +20,10 @@ class AddExperience extends Component {
       errors: {},
       disabled: false
     }
-  }
 
-  static propTypes = {
-    profile: object.isRequired,
-    errors: object.isRequired,
-    addExperience: func.isRequired
+    this.onChange = this.onChange.bind(this);
+    this.onCheck = this.onCheck.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,11 +48,11 @@ class AddExperience extends Component {
     this.props.addExperience(expData, this.props.history);
   }
 
-  onChange = (e) => {
+  onChange(e) {
     this.setState({[e.target.name]: e.target.value});
   }
 
-  onCheck = (e) => {
+  onCheck(e) {
     this.setState({
       disabled: !this.state.disabled,
       current: !this.state.current
@@ -148,6 +146,12 @@ class AddExperience extends Component {
       </div>
     )
   }
+}
+
+AddExperience.propTypes = {
+  profile: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+  addExperience: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({

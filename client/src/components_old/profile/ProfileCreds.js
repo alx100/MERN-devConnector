@@ -29,7 +29,7 @@ class ProfileCreds extends Component {
           <Moment format="YYYY/MM/DD">{edu.from}</Moment> -
           {edu.to === null ? (' Now') : (<Moment format="YYYY/MM/DD">{edu.to}</Moment>)}
         </p>
-        <p><strong>Degree:</strong> {edu.degree}</p>
+        <p><strong>Degree:</strong> {edu.title}</p>
         <p>
         <strong>Field Of Study:</strong> {edu.fieldofstudy}
         </p>

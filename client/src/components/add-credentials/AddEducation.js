@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { object, func } from 'prop-types';
 import { addEducation } from '../../actions/profileActions';
 
 class AddEducation extends Component {
@@ -20,10 +20,12 @@ class AddEducation extends Component {
       errors: {},
       disabled: false
     }
+  }
 
-    this.onChange = this.onChange.bind(this);
-    this.onCheck = this.onCheck.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+  static propTypes = {
+    profile: object.isRequired,
+    errors: object.isRequired,
+    addEducation: func.isRequired
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,7 +34,7 @@ class AddEducation extends Component {
     }
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const eduData = {
@@ -48,11 +50,11 @@ class AddEducation extends Component {
     this.props.addEducation(eduData, this.props.history);
   }
 
-  onChange(e) {
+  onChange = (e) => {
     this.setState({[e.target.name]: e.target.value});
   }
 
-  onCheck(e) {
+  onCheck = (e) => {
     this.setState({
       disabled: !this.state.disabled,
       current: !this.state.current
@@ -146,12 +148,6 @@ class AddEducation extends Component {
       </div>
     )
   }
-}
-
-AddEducation.propTypes = {
-  profile: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
-  addEducation: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
