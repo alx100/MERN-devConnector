@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { object } from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup'; 
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup'; 
 import InputGroup from '../common/InputGroup'; 
@@ -28,9 +28,11 @@ class CreateProfile extends Component {
       instagram: '', 
       errors: {} 
     };
-    
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  static propTypes = {
+    profile: object.isRequired, 
+    errors: object.isRequired 
   }
 
   componentWillReceiveProps(nextProps) {
@@ -39,7 +41,7 @@ class CreateProfile extends Component {
     }
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
 
     const profileData = {
@@ -61,7 +63,7 @@ class CreateProfile extends Component {
     this.props.createProfile(profileData, this.props.history);
   }
 
-  onChange(e) {
+  onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
@@ -235,11 +237,6 @@ class CreateProfile extends Component {
       </div>
     )
   }
-}
-
-CreateProfile.propTypes = {
-  profile: PropTypes.object.isRequired, 
-  errors: PropTypes.object.isRequired 
 }
 
 const mapStateToProps = (state) => ({
